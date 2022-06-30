@@ -5,4 +5,20 @@
 package frc.robot.subsystems;
 
 /** Add your docs here. */
-public class SwerveModuleConfig {}
+public class SwerveModuleConfig 
+{
+    public double steerCurrentLimit;
+    public double driveCurrentLimit;
+    public double steerCurrentThreshold;
+    public double driveCurrentThreshold;
+    public double steerCurrentThresholdTime;
+    public double driveCurrentThresholdTime;
+    public double steerP;
+    public double steerI;
+    public double steerD;
+    public double steerF;
+    public double driveP;
+    public double driveI;
+    public double driveD;
+    public double driveF;    
+}
