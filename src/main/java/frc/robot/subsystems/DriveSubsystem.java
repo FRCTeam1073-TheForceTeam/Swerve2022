@@ -9,6 +9,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveSubsystem extends SubsystemBase {
@@ -26,10 +27,10 @@ public class DriveSubsystem extends SubsystemBase {
     );
 
     modules = new SwerveModule[4];
-    modules[0] = new SwerveModule(new SwerveModuleConfig());
-    modules[1] = new SwerveModule(new SwerveModuleConfig());
-    modules[2] = new SwerveModule(new SwerveModuleConfig());
-    modules[3] = new SwerveModule(new SwerveModuleConfig());
+    modules[0] = new SwerveModule(new SwerveModuleConfig(),new SwerveModuleIDConfig());
+    modules[1] = new SwerveModule(new SwerveModuleConfig(),new SwerveModuleIDConfig());
+    modules[2] = new SwerveModule(new SwerveModuleConfig(),new SwerveModuleIDConfig());
+    modules[3] = new SwerveModule(new SwerveModuleConfig(),new SwerveModuleIDConfig());
 
     chassisSpeeds = new ChassisSpeeds(0,0,0);
   }
@@ -68,5 +69,14 @@ public class DriveSubsystem extends SubsystemBase {
     modules[1].setCommand(states[1].angle.getRadians(), states[1].speedMetersPerSecond);
     modules[2].setCommand(states[2].angle.getRadians(), states[2].speedMetersPerSecond);
     modules[3].setCommand(states[3].angle.getRadians(), states[3].speedMetersPerSecond);
+
+    SmartDashboard.putNumber("Module 0 Angle", modules[0].getSteeringAngle());
+    SmartDashboard.putNumber("Module 1 Angle", modules[1].getSteeringAngle());
+    SmartDashboard.putNumber("Module 2 Angle", modules[2].getSteeringAngle());
+    SmartDashboard.putNumber("Module 3 Angle", modules[3].getSteeringAngle());
+    SmartDashboard.putNumber("Module 0 Velocity", modules[0].getVelocity());
+    SmartDashboard.putNumber("Module 1 Velocity", modules[1].getVelocity());
+    SmartDashboard.putNumber("Module 2 Velocity", modules[2].getVelocity());
+    SmartDashboard.putNumber("Module 3 Velocity", modules[3].getVelocity());
   }
 }

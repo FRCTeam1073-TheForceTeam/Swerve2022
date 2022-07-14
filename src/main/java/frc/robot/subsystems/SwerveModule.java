@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -30,16 +31,51 @@ public class SwerveModule
 
     public double getSteeringAngle()
     {
-        return 0;
+        return steerEncoder.getAbsolutePosition()-cfg.steerAngleOffset;
     }
 
     public double getVelocity(){
-        return 0;
+        return driveMotor.getSelectedSensorVelocity()/cfg.tickPerMeter*10.0;
     }
+//*Wrapping code from sds example swerve library
+    public void setCommand(double steeringAngle, double driveVelocity){
+        steeringAngle %= (2.0 * Math.PI);
+        if (steeringAngle < 0.0) {
+            steeringAngle += 2.0 * Math.PI;
+        }
 
-    public void setCommand(double steeringAngle, double Velocity){
+        double difference = steeringAngle - getSteeringAngle();
+        // Change the target angle so the difference is in the range [-pi, pi) instead of [0, 2pi)
+        if (difference >= Math.PI) {
+            steeringAngle -= 2.0 * Math.PI;
+        } else if (difference < -Math.PI) {
+            steeringAngle += 2.0 * Math.PI;
+        }
+        difference = steeringAngle - getSteeringAngle(); // Recalculate difference
 
+        // If the difference is greater than 90 deg or less than -90 deg the drive can be inverted so the total
+        // movement of the module is less than 90 deg
+        if (difference > Math.PI / 2.0 || difference < -Math.PI / 2.0) {
+            // Only need to add 180 deg here because the target angle will be put back into the range [0, 2pi)
+            steeringAngle += Math.PI;
+            driveVelocity *= -1.0;
+        }
+
+        // Put the target angle back into the range [0, 2pi)
+        steeringAngle %= (2.0 * Math.PI);
+        if (steeringAngle < 0.0) {
+            steeringAngle += 2.0 * Math.PI;
+        }
+
+        setDriveVelocity(driveVelocity);
+        setSteerAngle(steeringAngle);
     }
+    public void setDriveVelocity(double driveVelocity){
+        driveMotor.set(ControlMode.Velocity,driveVelocity*cfg.tickPerMeter*0.1);
+    }
+    public void setSteerAngle(double steeringAngle){
+        steerMotor.set(ControlMode.Position,steeringAngle*cfg.tickPerRadian);
+     }
 
     public void setUpMotors()
     {

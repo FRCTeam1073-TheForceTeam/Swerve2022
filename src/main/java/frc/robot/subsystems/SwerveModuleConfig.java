@@ -7,6 +7,9 @@ package frc.robot.subsystems;
 /** Add your docs here. */
 public class SwerveModuleConfig 
 {
+    public double tickPerMeter;
+    public double tickPerRadian;
+    public double steerAngleOffset;
     public double steerCurrentLimit;
     public double driveCurrentLimit;
     public double steerCurrentThreshold;
