@@ -16,6 +16,7 @@ public class DriveSubsystem extends SubsystemBase {
   private SwerveDriveKinematics kinematics;
   private SwerveModule[] modules;
   private ChassisSpeeds chassisSpeeds;
+  private boolean debug = true;
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -61,15 +62,16 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
-    SwerveDriveKinematics.desaturateWheelSpeeds(states, 3.0);
+    if (! debug){
+      // This method will be called once per scheduler run
+      SwerveModuleState[] states = kinematics.toSwerveModuleStates(chassisSpeeds);
+      SwerveDriveKinematics.desaturateWheelSpeeds(states, 3.0);
 
-    modules[0].setCommand(states[0].angle.getRadians(), states[0].speedMetersPerSecond);
-    modules[1].setCommand(states[1].angle.getRadians(), states[1].speedMetersPerSecond);
-    modules[2].setCommand(states[2].angle.getRadians(), states[2].speedMetersPerSecond);
-    modules[3].setCommand(states[3].angle.getRadians(), states[3].speedMetersPerSecond);
-
+      modules[0].setCommand(states[0].angle.getRadians(), states[0].speedMetersPerSecond);
+      modules[1].setCommand(states[1].angle.getRadians(), states[1].speedMetersPerSecond);
+      modules[2].setCommand(states[2].angle.getRadians(), states[2].speedMetersPerSecond);
+      modules[3].setCommand(states[3].angle.getRadians(), states[3].speedMetersPerSecond);
+    }
     SmartDashboard.putNumber("Module 0 Angle", modules[0].getSteeringAngle());
     SmartDashboard.putNumber("Module 1 Angle", modules[1].getSteeringAngle());
     SmartDashboard.putNumber("Module 2 Angle", modules[2].getSteeringAngle());
@@ -78,5 +80,17 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Module 1 Velocity", modules[1].getVelocity());
     SmartDashboard.putNumber("Module 2 Velocity", modules[2].getVelocity());
     SmartDashboard.putNumber("Module 3 Velocity", modules[3].getVelocity());
+  }
+  public void setDebugSpeed(double speed){
+    modules[0].setDriveVelocity(speed);
+    modules[1].setDriveVelocity(speed);
+    modules[2].setDriveVelocity(speed);
+    modules[3].setDriveVelocity(speed);
+  }
+  public void setDebugAngle(double angle){
+    modules[0].setSteerAngle(angle);
+    modules[1].setSteerAngle(angle);
+    modules[2].setSteerAngle(angle);
+    modules[3].setSteerAngle(angle);
   }
 }
