@@ -20,19 +20,50 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-    kinematics = new SwerveDriveKinematics(
-      new Translation2d(0,0),
-      new Translation2d(0,0),
-      new Translation2d(0,0),
-      new Translation2d(0,0)
-    );
 
     modules = new SwerveModule[4];
-    modules[0] = new SwerveModule(new SwerveModuleConfig(),new SwerveModuleIDConfig());
-    modules[1] = new SwerveModule(new SwerveModuleConfig(),new SwerveModuleIDConfig());
-    modules[2] = new SwerveModule(new SwerveModuleConfig(),new SwerveModuleIDConfig());
-    modules[3] = new SwerveModule(new SwerveModuleConfig(),new SwerveModuleIDConfig());
+    //front left
+    SwerveModuleConfig moduleConfig = new SwerveModuleConfig();
+    SwerveModuleIDConfig moduleIDConfig = new SwerveModuleIDConfig();
+    moduleIDConfig.driveMotorID = 1;
+    moduleIDConfig.steerMotorID = 2;
+    moduleIDConfig.steerEncoderID = 3;
+    moduleConfig.position = new Translation2d(0.217,0.217);
+    modules[0] = new SwerveModule(moduleConfig, moduleIDConfig);
 
+    //front right
+    moduleConfig = new SwerveModuleConfig();
+    moduleIDConfig = new SwerveModuleIDConfig();
+    moduleIDConfig.driveMotorID = 4;
+    moduleIDConfig.steerMotorID = 5;
+    moduleIDConfig.steerEncoderID = 6;
+    moduleConfig.position = new Translation2d(0.217,-0.217);
+    modules[1] = new SwerveModule(moduleConfig, moduleIDConfig);
+
+    //back left
+    moduleConfig = new SwerveModuleConfig();
+    moduleIDConfig = new SwerveModuleIDConfig();
+    moduleIDConfig.driveMotorID = 7;
+    moduleIDConfig.steerMotorID = 8;
+    moduleIDConfig.steerEncoderID = 9;
+    moduleConfig.position = new Translation2d(-0.217,0.217);
+    modules[2] = new SwerveModule(moduleConfig, moduleIDConfig);
+
+    //back right
+    moduleConfig = new SwerveModuleConfig();
+    moduleIDConfig = new SwerveModuleIDConfig();
+    moduleIDConfig.driveMotorID = 10;
+    moduleIDConfig.steerMotorID = 11;
+    moduleIDConfig.steerEncoderID = 12;
+    moduleConfig.position = new Translation2d(-0.217,-0.217);
+    modules[3] = new SwerveModule(moduleConfig, moduleIDConfig);
+
+    kinematics = new SwerveDriveKinematics(
+      modules[0].position,
+      modules[1].position,
+      modules[2].position,
+      modules[3].position
+    );
     chassisSpeeds = new ChassisSpeeds(0,0,0);
   }
 
@@ -82,15 +113,15 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Module 3 Velocity", modules[3].getVelocity());
   }
   public void setDebugSpeed(double speed){
-    modules[0].setDriveVelocity(speed);
-    modules[1].setDriveVelocity(speed);
-    modules[2].setDriveVelocity(speed);
-    modules[3].setDriveVelocity(speed);
+    modules[0].setDebugTranslate(speed);
+    modules[1].setDebugTranslate(speed);
+    modules[2].setDebugTranslate(speed);
+    modules[3].setDebugTranslate(speed);
   }
   public void setDebugAngle(double angle){
-    modules[0].setSteerAngle(angle);
-    modules[1].setSteerAngle(angle);
-    modules[2].setSteerAngle(angle);
-    modules[3].setSteerAngle(angle);
+    modules[0].setDebugRotate(angle);
+    modules[1].setDebugRotate(angle);
+    modules[2].setDebugRotate(angle);
+    modules[3].setDebugRotate(angle);
   }
 }

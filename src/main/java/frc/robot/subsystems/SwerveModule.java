@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
+import edu.wpi.first.math.geometry.Translation2d;
+
 /** Add your docs here. */
 public class SwerveModule 
 {
@@ -18,9 +20,11 @@ public class SwerveModule
     private WPI_TalonFX steerMotor, driveMotor;
     private SwerveModuleIDConfig ids;
     private CANCoder steerEncoder;
+    public Translation2d position;
 
     public SwerveModule(SwerveModuleConfig cfg, SwerveModuleIDConfig ids)
     {
+        this.position = cfg.position;
         this.cfg = cfg;
         this.ids = ids;
         steerMotor = new WPI_TalonFX(ids.steerMotorID);
@@ -111,5 +115,15 @@ public class SwerveModule
         driveMotor.config_kD(0, cfg.driveD);
         driveMotor.config_kF(0, cfg.driveF);
         driveMotor.setIntegralAccumulator(0);
+    }
+
+    public void setDebugTranslate(double power)
+    {
+        driveMotor.set(ControlMode.PercentOutput, power);
+    }
+
+    public void setDebugRotate(double power)
+    {
+        steerMotor.set(ControlMode.PercentOutput, power);
     }
 }
