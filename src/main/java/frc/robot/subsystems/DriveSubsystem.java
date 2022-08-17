@@ -25,36 +25,36 @@ public class DriveSubsystem extends SubsystemBase {
     //front left
     SwerveModuleConfig moduleConfig = new SwerveModuleConfig();
     SwerveModuleIDConfig moduleIDConfig = new SwerveModuleIDConfig();
-    moduleIDConfig.driveMotorID = 1;
-    moduleIDConfig.steerMotorID = 2;
-    moduleIDConfig.steerEncoderID = 3;
+    moduleIDConfig.driveMotorID = 43;
+    moduleIDConfig.steerMotorID = 28;
+    moduleIDConfig.steerEncoderID = 58;
     moduleConfig.position = new Translation2d(0.217,0.217);
     modules[0] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //front right
     moduleConfig = new SwerveModuleConfig();
     moduleIDConfig = new SwerveModuleIDConfig();
-    moduleIDConfig.driveMotorID = 4;
-    moduleIDConfig.steerMotorID = 5;
-    moduleIDConfig.steerEncoderID = 6;
+    moduleIDConfig.driveMotorID = 38;
+    moduleIDConfig.steerMotorID = 33;
+    moduleIDConfig.steerEncoderID = 52;
     moduleConfig.position = new Translation2d(0.217,-0.217);
     modules[1] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //back left
     moduleConfig = new SwerveModuleConfig();
     moduleIDConfig = new SwerveModuleIDConfig();
-    moduleIDConfig.driveMotorID = 7;
-    moduleIDConfig.steerMotorID = 8;
-    moduleIDConfig.steerEncoderID = 9;
+    moduleIDConfig.driveMotorID = 39;
+    moduleIDConfig.steerMotorID = 47;
+    moduleIDConfig.steerEncoderID = 53;
     moduleConfig.position = new Translation2d(-0.217,0.217);
     modules[2] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //back right
     moduleConfig = new SwerveModuleConfig();
     moduleIDConfig = new SwerveModuleIDConfig();
-    moduleIDConfig.driveMotorID = 10;
-    moduleIDConfig.steerMotorID = 11;
-    moduleIDConfig.steerEncoderID = 12;
+    moduleIDConfig.driveMotorID = 26;
+    moduleIDConfig.steerMotorID = 40;
+    moduleIDConfig.steerEncoderID = 51;
     moduleConfig.position = new Translation2d(-0.217,-0.217);
     modules[3] = new SwerveModule(moduleConfig, moduleIDConfig);
 
