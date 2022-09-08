@@ -29,6 +29,11 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig.steerMotorID = 28;
     moduleIDConfig.steerEncoderID = 58;
     moduleConfig.position = new Translation2d(0.217,0.217);
+    moduleConfig.tickPerMeter = 52920; // 
+    moduleConfig.driveP = 0.1; 
+    moduleConfig.driveI = 0; // placeholder value
+    moduleConfig.driveD = 0; // placeholder value
+    moduleConfig.driveF = 0; // placeholder value
     modules[0] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //front right
@@ -38,6 +43,11 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig.steerMotorID = 33;
     moduleIDConfig.steerEncoderID = 52;
     moduleConfig.position = new Translation2d(0.217,-0.217);
+    moduleConfig.tickPerMeter = 52920;
+    moduleConfig.driveP = 0.1; 
+    moduleConfig.driveI = 0; // placeholder value
+    moduleConfig.driveD = 0; // placeholder value
+    moduleConfig.driveF = 0; // placeholder value
     modules[1] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //back left
@@ -47,6 +57,11 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig.steerMotorID = 47;
     moduleIDConfig.steerEncoderID = 53;
     moduleConfig.position = new Translation2d(-0.217,0.217);
+    moduleConfig.tickPerMeter = 52920;
+    moduleConfig.driveP = 0.1; 
+    moduleConfig.driveI = 0; // placeholder value
+    moduleConfig.driveD = 0; // placeholder value
+    moduleConfig.driveF = 0; // placeholder value
     modules[2] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //back right
@@ -56,6 +71,11 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig.steerMotorID = 40;
     moduleIDConfig.steerEncoderID = 51;
     moduleConfig.position = new Translation2d(-0.217,-0.217);
+    moduleConfig.tickPerMeter = 52920;
+    moduleConfig.driveP = 0.1; 
+    moduleConfig.driveI = 0; // placeholder value
+    moduleConfig.driveD = 0; // placeholder value
+    moduleConfig.driveF = 0; // placeholder value
     modules[3] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     kinematics = new SwerveDriveKinematics(
@@ -113,10 +133,10 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Module 3 Velocity", modules[3].getVelocity());
   }
   public void setDebugSpeed(double speed){
-    modules[0].setDebugTranslate(speed);
-    modules[1].setDebugTranslate(speed);
-    modules[2].setDebugTranslate(speed);
-    modules[3].setDebugTranslate(speed);
+    modules[0].setDriveVelocity(speed);
+    modules[1].setDriveVelocity(speed);
+    modules[2].setDriveVelocity(speed);
+    modules[3].setDriveVelocity(speed);
   }
   public void setDebugAngle(double angle){
     modules[0].setDebugRotate(angle);
@@ -124,4 +144,5 @@ public class DriveSubsystem extends SubsystemBase {
     modules[2].setDebugRotate(angle);
     modules[3].setDebugRotate(angle);
   }
+
 }

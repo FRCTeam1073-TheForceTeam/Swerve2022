@@ -44,7 +44,8 @@ public class SwerveModule
 //*Wrapping code from sds example swerve library
     public void setCommand(double steeringAngle, double driveVelocity){
         steeringAngle %= (2.0 * Math.PI);
-        if (steeringAngle < 0.0) {
+        if (steeringAngle < 0.0) 
+        {
             steeringAngle += 2.0 * Math.PI;
         }
 
@@ -74,12 +75,14 @@ public class SwerveModule
         setDriveVelocity(driveVelocity);
         setSteerAngle(steeringAngle);
     }
-    public void setDriveVelocity(double driveVelocity){
+    public void setDriveVelocity(double driveVelocity)
+    {
         driveMotor.set(ControlMode.Velocity,driveVelocity*cfg.tickPerMeter*0.1);
     }
-    public void setSteerAngle(double steeringAngle){
+    public void setSteerAngle(double steeringAngle)
+    {
         steerMotor.set(ControlMode.Position,steeringAngle*cfg.tickPerRadian);
-     }
+    }
 
     public void setUpMotors()
     {
