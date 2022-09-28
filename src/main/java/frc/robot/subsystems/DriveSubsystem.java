@@ -27,20 +27,13 @@ public class DriveSubsystem extends SubsystemBase {
     SwerveModuleIDConfig moduleIDConfig = new SwerveModuleIDConfig();
     moduleIDConfig.driveMotorID = 43;
     moduleIDConfig.steerMotorID = 28;
-    moduleIDConfig.steerEncoderID = 14;
+    moduleIDConfig.steerEncoderID = 58;
     moduleConfig.position = new Translation2d(0.217,0.217);
     moduleConfig.tickPerMeter = 52920; // 
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
-
-    moduleConfig.tickPerRadian = 325.9; // 2,048 ticks per rotation, converted to radians
-    moduleConfig.steerP = 0.2; 
-    moduleConfig.steerI = 0; // placeholder value
-    moduleConfig.steerD = 0; // placeholder value
-    moduleConfig.steerF = 0; // placeholder value
-
     modules[0] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //front right
@@ -48,20 +41,13 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig = new SwerveModuleIDConfig();
     moduleIDConfig.driveMotorID = 38;
     moduleIDConfig.steerMotorID = 33;
-    moduleIDConfig.steerEncoderID = 11;
+    moduleIDConfig.steerEncoderID = 52;
     moduleConfig.position = new Translation2d(0.217,-0.217);
     moduleConfig.tickPerMeter = 52920;
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
-
-    moduleConfig.tickPerRadian = 325.9; // 2,048 ticks per rotation, converted to radians
-    moduleConfig.steerP = 0.2; 
-    moduleConfig.steerI = 0; // placeholder value
-    moduleConfig.steerD = 0; // placeholder value
-    moduleConfig.steerF = 0; // placeholder value
-
     modules[1] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //back left
@@ -69,20 +55,13 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig = new SwerveModuleIDConfig();
     moduleIDConfig.driveMotorID = 39;
     moduleIDConfig.steerMotorID = 47;
-    moduleIDConfig.steerEncoderID = 12;
+    moduleIDConfig.steerEncoderID = 53;
     moduleConfig.position = new Translation2d(-0.217,0.217);
     moduleConfig.tickPerMeter = 52920;
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
-
-    moduleConfig.tickPerRadian = 325.9; // 2,048 ticks per rotation, converted to radians
-    moduleConfig.steerP = 0.2; 
-    moduleConfig.steerI = 0; // placeholder value
-    moduleConfig.steerD = 0; // placeholder value
-    moduleConfig.steerF = 0; // placeholder value
-
     modules[2] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     //back right
@@ -90,20 +69,13 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig = new SwerveModuleIDConfig();
     moduleIDConfig.driveMotorID = 26;
     moduleIDConfig.steerMotorID = 40;
-    moduleIDConfig.steerEncoderID = 10;
+    moduleIDConfig.steerEncoderID = 51;
     moduleConfig.position = new Translation2d(-0.217,-0.217);
     moduleConfig.tickPerMeter = 52920;
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
-
-    moduleConfig.tickPerRadian = 325.9; // 2,048 ticks per rotation, converted to radians
-    moduleConfig.steerP = 0.2; 
-    moduleConfig.steerI = 0; // placeholder value
-    moduleConfig.steerD = 0; // placeholder value
-    moduleConfig.steerF = 0; // placeholder value
-
     modules[3] = new SwerveModule(moduleConfig, moduleIDConfig);
 
     kinematics = new SwerveDriveKinematics(
@@ -167,12 +139,10 @@ public class DriveSubsystem extends SubsystemBase {
     modules[3].setDriveVelocity(speed);
   }
   public void setDebugAngle(double angle){
-    SmartDashboard.putNumber("Debug Angle", angle);
-
-    modules[0].setSteerAngle(angle);
-    modules[1].setSteerAngle(angle);
-    modules[2].setSteerAngle(angle);
-    modules[3].setSteerAngle(angle);
+    modules[0].setDebugRotate(angle);
+    modules[1].setDebugRotate(angle);
+    modules[2].setDebugRotate(angle);
+    modules[3].setDebugRotate(angle);
   }
 
 }
