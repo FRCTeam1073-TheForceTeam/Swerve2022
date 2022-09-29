@@ -7,9 +7,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.RemoteFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.math.geometry.Translation2d;
 
@@ -17,7 +19,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 public class SwerveModule 
 {
     private SwerveModuleConfig cfg;
-    private WPI_TalonFX steerMotor, driveMotor;
+    private TalonFX steerMotor, driveMotor;
     private SwerveModuleIDConfig ids;
     private CANCoder steerEncoder;
     public Translation2d position;
@@ -27,8 +29,8 @@ public class SwerveModule
         this.position = cfg.position;
         this.cfg = cfg;
         this.ids = ids;
-        steerMotor = new WPI_TalonFX(ids.steerMotorID);
-        driveMotor = new WPI_TalonFX(ids.driveMotorID);
+        steerMotor = new TalonFX(ids.steerMotorID);
+        driveMotor = new TalonFX(ids.driveMotorID);
         steerEncoder = new CANCoder(ids.steerEncoderID);
         setUpMotors();
     }
@@ -92,8 +94,8 @@ public class SwerveModule
         steerMotor.setInverted(false);
         driveMotor.setInverted(false);
 
-        steerMotor.setSafetyEnabled(false);
-        driveMotor.setSafetyEnabled(false);
+        //steerMotor.setSafetyEnabled(false);
+        //driveMotor.setSafetyEnabled(false);
 
         steerMotor.setNeutralMode(NeutralMode.Brake);
         driveMotor.setNeutralMode(NeutralMode.Brake);
@@ -101,8 +103,10 @@ public class SwerveModule
         steerMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, cfg.steerCurrentLimit, cfg.steerCurrentThreshold, cfg.steerCurrentThresholdTime));
         driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, cfg.driveCurrentLimit, cfg.driveCurrentThreshold, cfg.driveCurrentThresholdTime));
 
-        //TODO: Fix the thing
-        //steerMotor.configSelectedFeedbackSensor(steerEncoder, 0, 0);
+        //Set up talon for CAN encoder
+        steerMotor.configRemoteFeedbackFilter(steerEncoder, 0);
+        steerMotor.configSelectedFeedbackSensor(RemoteFeedbackDevice.RemoteSensor0);
+
         driveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
 
