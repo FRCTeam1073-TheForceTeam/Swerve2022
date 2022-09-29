@@ -169,10 +169,10 @@ public class DriveSubsystem extends SubsystemBase {
   public void setDebugAngle(double angle){
     SmartDashboard.putNumber("Debug Angle", angle);
 
-    modules[0].setSteerAngle(angle);
-    modules[1].setSteerAngle(angle);
-    modules[2].setSteerAngle(angle);
-    modules[3].setSteerAngle(angle);
+    modules[0].setDebugRotate(angle);
+    modules[1].setDebugRotate(angle);
+    modules[2].setDebugRotate(angle);
+    modules[3].setDebugRotate(angle);
   }
 
 }
