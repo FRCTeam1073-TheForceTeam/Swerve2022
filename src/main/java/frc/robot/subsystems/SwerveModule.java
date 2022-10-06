@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -37,7 +38,7 @@ public class SwerveModule
 
     public double getSteeringAngle()
     {
-        return steerEncoder.getAbsolutePosition()-cfg.steerAngleOffset;
+        return (steerEncoder.getAbsolutePosition()*Math.PI/180)-cfg.steerAngleOffset;
     }
 
     public double getVelocity(){
@@ -83,7 +84,7 @@ public class SwerveModule
     }
     public void setSteerAngle(double steeringAngle)
     {
-        steerMotor.set(ControlMode.Position,steeringAngle*cfg.tickPerRadian);
+        steerMotor.set(ControlMode.Position,(steeringAngle+cfg.steerAngleOffset)*cfg.tickPerRadian);
     }
 
     public void setUpMotors()
@@ -104,8 +105,25 @@ public class SwerveModule
         driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, cfg.driveCurrentLimit, cfg.driveCurrentThreshold, cfg.driveCurrentThresholdTime));
 
         //Set up talon for CAN encoder
-        steerMotor.configRemoteFeedbackFilter(steerEncoder, 0);
-        steerMotor.configSelectedFeedbackSensor(RemoteFeedbackDevice.RemoteSensor0);
+        ErrorCode error = steerMotor.configRemoteFeedbackFilter(steerEncoder, 0);
+        if(error != ErrorCode.OK)
+        {
+            System.out.println("configRemoteFeedbackFilter didn't work: " + error);
+        }
+        else
+        {
+            System.out.println("configRemoteFeedbackFilter worked");
+        }
+        error = steerMotor.configSelectedFeedbackSensor(RemoteFeedbackDevice.RemoteSensor0);
+        if(error != ErrorCode.OK)
+        {
+            System.out.println("configSelectedFeedbackSensor didn't work: " + error);
+        }
+        else
+        {
+            System.out.println("configSelectedFeedbackSensor worked");
+        }
+        steerMotor.setSensorPhase(true);
 
         driveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 

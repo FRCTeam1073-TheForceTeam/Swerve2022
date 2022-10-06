@@ -30,7 +30,7 @@ public class TeleopDrive extends CommandBase {
  // ChassisSpeeds chassisSpeeds = new ChassisSpeeds(OI.getDriverLeftX(), OI.getDriverLeftY(), OI.getDriverRightX());
  // m_driveSubsystem.setChassisSpeeds(chassisSpeeds);
     m_driveSubsystem.setDebugSpeed(m_OI.getDriverLeftX());
-    m_driveSubsystem.setDebugAngle(m_OI.getDriverRightY());
+    m_driveSubsystem.setDebugAngle(m_OI.getDriverRightY() * 3);
     
   }
 

@@ -35,8 +35,9 @@ public class DriveSubsystem extends SubsystemBase {
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
 
-    moduleConfig.tickPerRadian = 325.9; // 2,048 ticks per rotation, converted to radians
-    moduleConfig.steerP = 0.2; 
+    moduleConfig.tickPerRadian = 4096.0/(2*Math.PI); // 4,096 ticks per rotation, converted to radians
+    moduleConfig.steerAngleOffset = 1.6;
+    moduleConfig.steerP = 0.8; 
     moduleConfig.steerI = 0; // placeholder value
     moduleConfig.steerD = 0; // placeholder value
     moduleConfig.steerF = 0; // placeholder value
@@ -56,8 +57,9 @@ public class DriveSubsystem extends SubsystemBase {
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
 
-    moduleConfig.tickPerRadian = 325.9; // 2,048 ticks per rotation, converted to radians
-    moduleConfig.steerP = 0.2; 
+    moduleConfig.tickPerRadian = 4096.0/(2*Math.PI); // 4,096 ticks per rotation, converted to radians
+    moduleConfig.steerAngleOffset = 1.9;
+    moduleConfig.steerP = 0.8; 
     moduleConfig.steerI = 0; // placeholder value
     moduleConfig.steerD = 0; // placeholder value
     moduleConfig.steerF = 0; // placeholder value
@@ -77,8 +79,9 @@ public class DriveSubsystem extends SubsystemBase {
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
 
-    moduleConfig.tickPerRadian = 325.9; // 2,048 ticks per rotation, converted to radians
-    moduleConfig.steerP = 0.2; 
+    moduleConfig.tickPerRadian = 4096.0/(2*Math.PI); // 4,096 ticks per rotation, converted to radians
+    moduleConfig.steerAngleOffset = 1.6;
+    moduleConfig.steerP = 0.8; 
     moduleConfig.steerI = 0; // placeholder value
     moduleConfig.steerD = 0; // placeholder value
     moduleConfig.steerF = 0; // placeholder value
@@ -98,8 +101,9 @@ public class DriveSubsystem extends SubsystemBase {
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
 
-    moduleConfig.tickPerRadian = 325.9; // 2,048 ticks per rotation, converted to radians
-    moduleConfig.steerP = 0.2; 
+    moduleConfig.tickPerRadian = 4096.0/(2*Math.PI); // 4,096 ticks per rotation, converted to radians
+    moduleConfig.steerAngleOffset = 1.1;
+    moduleConfig.steerP = 0.8; 
     moduleConfig.steerI = 0; // placeholder value
     moduleConfig.steerD = 0; // placeholder value
     moduleConfig.steerF = 0; // placeholder value
@@ -174,5 +178,4 @@ public class DriveSubsystem extends SubsystemBase {
     modules[2].setSteerAngle(angle);
     modules[3].setSteerAngle(angle);
   }
-
 }
