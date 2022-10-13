@@ -16,7 +16,17 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.math.geometry.Translation2d;
 
-/** Add your docs here. */
+/** Add your docs here. 
+ * 
+ * ! ! ! ! ! NOTE ! ! ! ! ! ! !
+ * 
+ * THIS CODE ONLY WORKS IF YOU SET THE CANCODERS TO BOOT TO ABSOLUTE POSITION
+ * 
+ * OTHERWISE THE WHEELS WILL NOT INITIALIZE IN THE CORRECT POSITIONS
+ * 
+ * ! ! ! ! ! NOTE ! ! ! ! ! ! !
+*/
+
 public class SwerveModule 
 {
     private SwerveModuleConfig cfg;
@@ -80,11 +90,11 @@ public class SwerveModule
     }
     public void setDriveVelocity(double driveVelocity)
     {
-        driveMotor.set(ControlMode.Velocity,driveVelocity*cfg.tickPerMeter*0.1);
+        driveMotor.set(ControlMode.Velocity, driveVelocity * cfg.tickPerMeter * 0.1);
     }
     public void setSteerAngle(double steeringAngle)
     {
-        steerMotor.set(ControlMode.Position,(steeringAngle - cfg.steerAngleOffset)*cfg.tickPerRadian);
+        steerMotor.set(ControlMode.Position, (steeringAngle - cfg.steerAngleOffset) * cfg.tickPerRadian);
     }
 
     public void setUpMotors()
