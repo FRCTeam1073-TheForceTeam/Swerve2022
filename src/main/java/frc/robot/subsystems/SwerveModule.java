@@ -38,7 +38,7 @@ public class SwerveModule
 
     public double getSteeringAngle()
     {
-        return (steerEncoder.getAbsolutePosition()*Math.PI/180)-cfg.steerAngleOffset;
+        return (steerEncoder.getAbsolutePosition()*Math.PI/180)+cfg.steerAngleOffset;
     }
 
     public double getVelocity(){
@@ -84,7 +84,7 @@ public class SwerveModule
     }
     public void setSteerAngle(double steeringAngle)
     {
-        steerMotor.set(ControlMode.Position,(steeringAngle+cfg.steerAngleOffset)*cfg.tickPerRadian);
+        steerMotor.set(ControlMode.Position,(steeringAngle - cfg.steerAngleOffset)*cfg.tickPerRadian);
     }
 
     public void setUpMotors()
