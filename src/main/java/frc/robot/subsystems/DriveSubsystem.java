@@ -16,7 +16,7 @@ public class DriveSubsystem extends SubsystemBase {
   private SwerveDriveKinematics kinematics;
   private SwerveModule[] modules;
   private ChassisSpeeds chassisSpeeds;
-  private boolean debug = true;
+  private boolean debug = false;
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {

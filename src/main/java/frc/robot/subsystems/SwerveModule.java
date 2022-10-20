@@ -15,6 +15,7 @@ import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** Add your docs here. 
  * 
@@ -48,7 +49,9 @@ public class SwerveModule
 
     public double getSteeringAngle()
     {
-        return (steerEncoder.getAbsolutePosition()*Math.PI/180)+cfg.steerAngleOffset;
+        //TODO: do we want it to give us absolute position
+        //return (steerEncoder.getPosition()*Math.PI/180)+cfg.steerAngleOffset;
+        return (steerEncoder.getPosition()*Math.PI/180) - cfg.steerAngleOffset;
     }
 
     public double getVelocity(){
@@ -70,6 +73,12 @@ public class SwerveModule
             steeringAngle += 2.0 * Math.PI;
         }
         difference = steeringAngle - getSteeringAngle(); // Recalculate difference
+
+        SmartDashboard.putNumber(String.format(" Steer Angle %d", ids.steerEncoderID), steeringAngle);
+        SmartDashboard.putNumber(String.format(" Drive Velocity %d", ids.steerEncoderID), driveVelocity);
+        SmartDashboard.putNumber(String.format(" Difference %d", ids.steerEncoderID), difference);
+        SmartDashboard.putNumber(String.format(" Steer Angle Result %d", ids.steerEncoderID), getSteeringAngle());
+
 
         // If the difference is greater than 90 deg or less than -90 deg the drive can be inverted so the total
         // movement of the module is less than 90 deg

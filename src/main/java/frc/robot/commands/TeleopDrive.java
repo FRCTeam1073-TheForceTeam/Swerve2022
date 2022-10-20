@@ -27,10 +27,11 @@ public class TeleopDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
- // ChassisSpeeds chassisSpeeds = new ChassisSpeeds(OI.getDriverLeftX(), OI.getDriverLeftY(), OI.getDriverRightX());
- // m_driveSubsystem.setChassisSpeeds(chassisSpeeds);
-    m_driveSubsystem.setDebugSpeed(m_OI.getDriverLeftX());
-    m_driveSubsystem.setDebugAngle(m_OI.getDriverRightY() * 3);
+  ChassisSpeeds chassisSpeeds = new ChassisSpeeds(m_OI.getDriverLeftX(), m_OI.getDriverLeftY(), m_OI.getDriverRightX());
+  //ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, 0);
+  m_driveSubsystem.setChassisSpeeds(chassisSpeeds);
+  //m_driveSubsystem.setDebugSpeed(m_OI.getDriverLeftX());
+  //m_driveSubsystem.setDebugAngle(m_OI.getDriverRightY() * 3);
     
   }
 
