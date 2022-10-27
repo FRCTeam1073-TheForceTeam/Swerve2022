@@ -82,11 +82,11 @@ public class SwerveModule
 
         // If the difference is greater than 90 deg or less than -90 deg the drive can be inverted so the total
         // movement of the module is less than 90 deg
-        if (difference > Math.PI / 2.0 || difference < -Math.PI / 2.0) {
+        /*if (difference > Math.PI / 2.0 || difference < -Math.PI / 2.0) {
             // Only need to add 180 deg here because the target angle will be put back into the range [0, 2pi)
             steeringAngle += Math.PI;
             driveVelocity *= -1.0;
-        }
+        }*/
 
         // Put the target angle back into the range [0, 2pi)
         steeringAngle %= (2.0 * Math.PI);
@@ -96,6 +96,10 @@ public class SwerveModule
 
         setDriveVelocity(driveVelocity);
         setSteerAngle(steeringAngle);
+        SmartDashboard.putNumber(String.format(" Steer Angle %d", ids.steerEncoderID), steeringAngle);
+        SmartDashboard.putNumber(String.format(" Drive Velocity %d", ids.steerEncoderID), driveVelocity);
+        SmartDashboard.putNumber(String.format(" Difference %d", ids.steerEncoderID), difference);
+        SmartDashboard.putNumber(String.format(" Steer Angle Result %d", ids.steerEncoderID), getSteeringAngle());
     }
     public void setDriveVelocity(double driveVelocity)
     {

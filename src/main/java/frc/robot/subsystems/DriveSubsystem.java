@@ -12,14 +12,16 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class DriveSubsystem extends SubsystemBase {
+public class DriveSubsystem extends SubsystemBase 
+{
   private SwerveDriveKinematics kinematics;
   private SwerveModule[] modules;
   private ChassisSpeeds chassisSpeeds;
   private boolean debug = false;
 
   /** Creates a new DriveSubsystem. */
-  public DriveSubsystem() {
+  public DriveSubsystem() 
+  {
 
     modules = new SwerveModule[4];
     //front left
@@ -28,7 +30,7 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig.driveMotorID = 43;
     moduleIDConfig.steerMotorID = 28;
     moduleIDConfig.steerEncoderID = 14;
-    moduleConfig.position = new Translation2d(0.217,0.217);
+    moduleConfig.position = new Translation2d(-0.217, 0.217);
     moduleConfig.tickPerMeter = 52920; // 
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
@@ -36,7 +38,7 @@ public class DriveSubsystem extends SubsystemBase {
     moduleConfig.driveF = 0; // placeholder value
 
     moduleConfig.tickPerRadian = 4096.0/(2*Math.PI); // 4,096 ticks per rotation, converted to radians
-    moduleConfig.steerAngleOffset = 6.1;
+    moduleConfig.steerAngleOffset = 2.879;
     moduleConfig.steerP = 0.8; 
     moduleConfig.steerI = 0; // placeholder value
     moduleConfig.steerD = 0; // placeholder value
@@ -50,15 +52,15 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig.driveMotorID = 38;
     moduleIDConfig.steerMotorID = 33;
     moduleIDConfig.steerEncoderID = 11;
-    moduleConfig.position = new Translation2d(0.217,-0.217);
-    moduleConfig.tickPerMeter = 52920;
+    moduleConfig.position = new Translation2d(-0.217,-0.217);
+    moduleConfig.tickPerMeter = -52920; // TODO: figure out why we need to do this
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
 
     moduleConfig.tickPerRadian = 4096.0/(2*Math.PI); // 4,096 ticks per rotation, converted to radians
-    moduleConfig.steerAngleOffset = 5.0;
+    moduleConfig.steerAngleOffset = 1.866;
     moduleConfig.steerP = 0.8; 
     moduleConfig.steerI = 0; // placeholder value
     moduleConfig.steerD = 0; // placeholder value
@@ -72,7 +74,7 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig.driveMotorID = 39;
     moduleIDConfig.steerMotorID = 47;
     moduleIDConfig.steerEncoderID = 12;
-    moduleConfig.position = new Translation2d(-0.217,0.217);
+    moduleConfig.position = new Translation2d(0.217, 0.217);
     moduleConfig.tickPerMeter = 52920;
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
@@ -80,7 +82,7 @@ public class DriveSubsystem extends SubsystemBase {
     moduleConfig.driveF = 0; // placeholder value
 
     moduleConfig.tickPerRadian = 4096.0/(2*Math.PI); // 4,096 ticks per rotation, converted to radians
-    moduleConfig.steerAngleOffset = 5.6;
+    moduleConfig.steerAngleOffset = 2.422; //1.109;
     moduleConfig.steerP = 0.8; 
     moduleConfig.steerI = 0; // placeholder value
     moduleConfig.steerD = 0; // placeholder value
@@ -94,15 +96,15 @@ public class DriveSubsystem extends SubsystemBase {
     moduleIDConfig.driveMotorID = 26;
     moduleIDConfig.steerMotorID = 40;
     moduleIDConfig.steerEncoderID = 10;
-    moduleConfig.position = new Translation2d(-0.217,-0.217);
-    moduleConfig.tickPerMeter = 52920;
+    moduleConfig.position = new Translation2d(0.217,-0.217);
+    moduleConfig.tickPerMeter = -52920; //TODO: same thing as id 11
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
     moduleConfig.driveF = 0; // placeholder value
 
     moduleConfig.tickPerRadian = 4096.0/(2*Math.PI); // 4,096 ticks per rotation, converted to radians
-    moduleConfig.steerAngleOffset = 1.0;
+    moduleConfig.steerAngleOffset = 1.109; //2.422
     moduleConfig.steerP = 0.8; 
     moduleConfig.steerI = 0; // placeholder value
     moduleConfig.steerD = 0; // placeholder value
