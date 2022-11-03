@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.drive.Vector2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.OI;
@@ -27,12 +29,14 @@ public class TeleopDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  ChassisSpeeds chassisSpeeds = new ChassisSpeeds(m_OI.getDriverLeftX() * 0.5, m_OI.getDriverLeftY() * 0.5, m_OI.getDriverRightX());
-  //ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, 0);
-  m_driveSubsystem.setChassisSpeeds(chassisSpeeds);
-  //m_driveSubsystem.setDebugSpeed(m_OI.getDriverLeftX());
-  //m_driveSubsystem.setDebugAngle(m_OI.getDriverRightY() * 3);
-    
+    Vector2d vector = new Vector2d(m_OI.getDriverLeftX() * 0.5, m_OI.getDriverLeftY() * 0.5);
+    vector.rotate(m_driveSubsystem.getHeading()); //rotates by degrees
+    ChassisSpeeds chassisSpeeds = new ChassisSpeeds(vector.x, vector.y, m_OI.getDriverRightX()); //rotation-oriented
+    //ChassisSpeeds chassisSpeeds = new ChassisSpeeds(m_OI.getDriverLeftX() * 0.5, m_OI.getDriverLeftY() * 0.5, m_OI.getDriverRightX()); //debug
+    //ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, 0);
+    m_driveSubsystem.setChassisSpeeds(chassisSpeeds);
+    //m_driveSubsystem.setDebugSpeed(m_OI.getDriverLeftX());
+    //m_driveSubsystem.setDebugAngle(m_OI.getDriverRightY() * 3); 
   }
 
   // Called once the command ends or is interrupted.

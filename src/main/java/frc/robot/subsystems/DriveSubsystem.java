@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.PigeonIMU_StatusFrame;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -18,10 +21,17 @@ public class DriveSubsystem extends SubsystemBase
   private SwerveModule[] modules;
   private ChassisSpeeds chassisSpeeds;
   private boolean debug = false;
+  private PigeonIMU pigeonIMU;
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() 
   {
+    pigeonIMU = new PigeonIMU(9);
+    pigeonIMU.configFactoryDefault();
+    pigeonIMU.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_9_SixDeg_YPR, 50);
+    pigeonIMU.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_10_SixDeg_Quat, 50);
+    pigeonIMU.setStatusFramePeriod(PigeonIMU_StatusFrame.CondStatus_6_SensorFusion, 50);
+    pigeonIMU.setFusedHeading(0);
 
     modules = new SwerveModule[4];
     //front left
@@ -31,7 +41,7 @@ public class DriveSubsystem extends SubsystemBase
     moduleIDConfig.steerMotorID = 28;
     moduleIDConfig.steerEncoderID = 14;
     moduleConfig.position = new Translation2d(-0.217, 0.217);
-    moduleConfig.tickPerMeter = 52920; // 
+    moduleConfig.tickPerMeter = 52257; // 
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
@@ -53,7 +63,7 @@ public class DriveSubsystem extends SubsystemBase
     moduleIDConfig.steerMotorID = 33;
     moduleIDConfig.steerEncoderID = 11;
     moduleConfig.position = new Translation2d(-0.217,-0.217);
-    moduleConfig.tickPerMeter = -52920; // TODO: figure out why we need to do this
+    moduleConfig.tickPerMeter = -52257; // TODO: figure out why we need to do this
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
@@ -75,7 +85,7 @@ public class DriveSubsystem extends SubsystemBase
     moduleIDConfig.steerMotorID = 47;
     moduleIDConfig.steerEncoderID = 12;
     moduleConfig.position = new Translation2d(0.217, 0.217);
-    moduleConfig.tickPerMeter = 52920;
+    moduleConfig.tickPerMeter = 52257;
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
@@ -97,7 +107,7 @@ public class DriveSubsystem extends SubsystemBase
     moduleIDConfig.steerMotorID = 40;
     moduleIDConfig.steerEncoderID = 10;
     moduleConfig.position = new Translation2d(0.217,-0.217);
-    moduleConfig.tickPerMeter = -52920; //TODO: same thing as id 11
+    moduleConfig.tickPerMeter = -52257; //TODO: same thing as id 11
     moduleConfig.driveP = 0.1; 
     moduleConfig.driveI = 0; // placeholder value
     moduleConfig.driveD = 0; // placeholder value
@@ -119,6 +129,15 @@ public class DriveSubsystem extends SubsystemBase
       modules[3].position
     );
     chassisSpeeds = new ChassisSpeeds(0,0,0);
+  }
+
+  //returns heading in degrees
+  public double getHeading(){
+    return pigeonIMU.getFusedHeading();
+  }
+
+  public void zeroHeading(){
+    pigeonIMU.setFusedHeading(0);
   }
 
   public void setChassisSpeeds(ChassisSpeeds speeds){
@@ -165,6 +184,7 @@ public class DriveSubsystem extends SubsystemBase
     SmartDashboard.putNumber("Module 1 Velocity", modules[1].getVelocity());
     SmartDashboard.putNumber("Module 2 Velocity", modules[2].getVelocity());
     SmartDashboard.putNumber("Module 3 Velocity", modules[3].getVelocity());
+    SmartDashboard.putNumber("Heading", getHeading());
   }
   public void setDebugSpeed(double speed){
     modules[0].setDriveVelocity(speed);
