@@ -87,6 +87,7 @@ public class SwerveModule
             steeringAngle += Math.PI;
             driveVelocity *= -1.0;
         }*/
+        steeringAngle = steeringAngle % (Math.PI * 2);
 
         // Put the target angle back into the range [0, 2pi)
         steeringAngle %= (2.0 * Math.PI);
